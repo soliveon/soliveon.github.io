@@ -525,7 +525,7 @@ section{
 /* 시적 문구 글씨 */
 .poemLines{
   margin:0;
-  font-size:16px;
+  font-size:18px;
   line-height:2;
   letter-spacing:-0.01em;
 }
