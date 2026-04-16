@@ -1,0 +1,1042 @@
+/* =========================================================
+   Soliveon Styles
+   ---------------------------------------------------------
+   [이 파일에서 수정 가능한 부분]
+   1) 전체 배경색 / 글자색 / 포인트색
+   2) 글씨 크기 / 폰트 / 줄간격
+   3) hero 첫 화면 높이 / 위치 / 정렬
+   4) 버튼 색 / 크기 / 모양
+   5) 카드 여백 / 테두리 / 그림자
+   6) 섹션 간격 / 모바일 대응
+========================================================= */
+
+/* =========================================================
+   공통 색상 / 크기 변수
+   ---------------------------------------------------------
+   가장 먼저 많이 수정하는 부분
+   - 사이트 전체 배경색
+   - 기본 글자색
+   - 버튼 메인색
+   - 카드 모서리 / 그림자
+========================================================= */
+:root{
+  /* 전체 배경색 */
+  --bg:#F7F5F0;
+
+  /* 카드 / 박스 배경색 */
+  --surface:#FFFFFF;
+  --surface-soft:#F1EEE7;
+  --surface-strong:#ECE7DF;
+
+  /* 기본 글자색 */
+  --text:#151515;
+
+  /* 연한 설명문 색 */
+  --text-muted:rgba(21,21,21,.64);
+
+  /* 테두리 색 */
+  --line:rgba(21,21,21,.10);
+
+  /* 메인 브랜드색 (버튼, 포인트) */
+  --primary:#4E6F49;
+  --primary-strong:#3E5A3A;
+  --primary-soft:rgba(78,111,73,.10);
+
+  /* 보조 포인트색 */
+  --accent:#B7CF63;
+
+  /* 그림자 */
+  --shadow:0 18px 48px rgba(0,0,0,.06);
+  --shadow-soft:0 10px 28px rgba(0,0,0,.04);
+
+  /* 카드 둥근 정도 */
+  --radius:20px;
+
+  /* 콘텐츠 최대 너비 */
+  --max:1160px;
+}
+
+*{box-sizing:border-box;}
+html,body{height:100%;}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:"Noto Sans KR","Inter",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+img{
+  display:block;
+  max-width:100%;
+}
+
+/* 전체 콘텐츠 폭
+   - 좌우 여백을 늘리고 싶으면 calc(...) 숫자 조절
+   - 전체 폭을 넓히고 싶으면 --max 수정 */
+.container{
+  width:min(var(--max), calc(100% - 48px));
+  margin:0 auto;
+}
+
+/* 섹션 기본 위아래 간격
+   - 페이지 전체가 너무 넓으면 줄이고
+   - 답답하면 늘리면 됨 */
+
+section{
+  scroll-margin-top:110px;
+  padding-bottom: 50px;
+}
+
+#story{
+  padding-top:50px;
+  
+}
+
+/* =========================================================
+   HERO 첫 화면
+   ---------------------------------------------------------
+   여기서 수정:
+   - 첫 화면 높이
+   - hero 배경
+   - 로고 위치
+   - 메인 문구 크기 / 색 / 여백
+========================================================= */
+
+/* hero 전체 박스 */
+.heroSvg{
+  position:relative;
+  min-height:100vh;
+  min-height:100svh;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+
+  /* hero 기본 배경색 */
+  background-color:#5d7647;
+
+  /* hero SVG 배경 파일 */
+  background-image:url("../img/hero-bg.svg");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+
+/* hero 배경 애니메이션용 레이어
+   - 움직임 없애려면 animation:none;
+   - 너무 크게 움직이면 keyframes 조절 */
+.heroSvg::before{
+  content:"";
+  position:absolute;
+  inset:-3%;
+  background-image:url("../img/hero-bg.svg");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  animation:heroFloat 18s ease-in-out infinite alternate;
+  z-index:0;
+}
+
+/* hero 위 어두운 오버레이
+   - 글자가 더 잘 보이게 하는 역할
+   - 너무 어두우면 rgba 숫자 낮추기 */
+.heroOverlay{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.06) 35%, rgba(0,0,0,.10));
+}
+
+.heroSvg > *{
+  position:relative;
+  z-index:2;
+}
+
+/* hero 배경 움직임 */
+@keyframes heroFloat{
+  0%{ transform:scale(1.02) translate3d(0,0,0); }
+  100%{ transform:scale(1.07) translate3d(-1.5%, -1%, 0); }
+}
+
+/* hero 안 콘텐츠 정렬 */
+.heroInnerEditorial{
+  width:100%;
+  display:flex;
+  align-items:flex-start;
+  justify-content:flex-start;
+}
+
+/* hero 텍스트 묶음 위치
+   - 위로 올리고 싶으면 padding-top 줄이기
+   - 아래로 내리고 싶으면 padding-top 늘리기 */
+.heroTextEditorial{
+  width:100%;
+  padding-top:0.5vh;
+}
+
+/* hero 로고 줄 */
+.heroBrandRow{
+  margin-bottom:28px;
+}
+
+/* hero 로고 크기
+   - 로고 더 크게 = width 늘리기 */
+.heroLogo{
+  width:70px;
+  height:auto;
+  opacity:.95;
+  filter:drop-shadow(0 8px 20px rgba(0,0,0,.10));
+}
+
+
+/* 첫 화면 브랜드명 Soliveon  보통 여기서 수정!
+   - 글씨 크기 = font-size
+   - 색 = color
+   - 글자 간격 = letter-spacing */
+.brandEditorial{
+  margin:0 50px;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-weight:700;
+  font-size:clamp(74px, 9vw, 152px);
+  line-height:.9;
+  letter-spacing:-0.05em;
+  color:#fff;
+  text-shadow:0 12px 32px rgba(0,0,0,.12);
+}
+
+/* 첫 화면 영문 문구 묶음 */
+.taglineEditorial{
+  margin-top:34px;
+}
+
+/* 첫 화면 큰 영문 문구
+   - 크기 = font-size
+   - 최대 줄 길이 = max-width
+   - 색 = color */
+.taglineEditorial .e{
+  display:block;
+  margin-left: 50px;
+  max-width:12ch;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-style:italic;
+  font-weight:500;
+  font-size:clamp(40px, 5.6vw, 94px);
+  line-height:1.02;
+  letter-spacing:-0.035em;
+  color:#fff;
+  text-shadow:0 12px 32px rgba(0,0,0,.10);
+}
+
+/* hero 작은 보조 문장 */
+.heroSubcopy{
+  margin:24px 50px 0;
+  max-width:34rem;
+  font-family:"Inter","Noto Sans KR",sans-serif;
+  font-size:14px;
+  line-height:1.85;
+  color:rgba(255,255,255,.78);
+}
+
+/* hero 하단 스크롤 아이콘 위치 */
+.heroScrollCue{
+  position:absolute;
+  left:50%;
+  bottom:34px;
+  z-index:2;
+  width:56px;
+  height:56px;
+  transform:translateX(-50%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* 스크롤 화살표 모양 */
+.chevron{
+  position:absolute;
+  width:22px;
+  height:22px;
+  border-right:2px solid rgba(255,255,255,.72);
+  border-bottom:2px solid rgba(255,255,255,.72);
+  transform:rotate(45deg);
+}
+
+.chevron1{ top:8px; }
+.chevron2{ top:20px; }
+
+/* =========================================================
+   Floating Navigation
+   ---------------------------------------------------------
+   여기서 수정하는 것:
+   - 상단 메뉴 박스 모양
+   - 메뉴 글자 크기 / 간격
+   - 로고 크기
+========================================================= */
+
+/* 상단에 뜨는 전체 nav 박스 위치 */
+.navFloat{
+  position:fixed;
+  top:18px;
+  left:0;
+  right:0;
+  z-index:9999;
+  display:flex;
+  justify-content:center;
+  pointer-events:none;
+  opacity:0;
+  transform:translateY(-12px);
+  transition:opacity .45s ease, transform .45s ease;
+}
+
+/* 스크롤 후 보일 때 */
+.navFloat.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* nav 실제 내용 박스
+   - 배경/둥근 정도/그림자 수정 */
+.navFloatInner{
+  pointer-events:auto;
+  width:min(var(--max), calc(100% - 32px));
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  padding:12px 18px;
+  background:rgba(255,255,255,.80);
+  border:1px solid rgba(0,0,0,.06);
+  border-radius:999px;
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  box-shadow:0 14px 34px rgba(0,0,0,.08);
+}
+
+/* nav 왼쪽 브랜드 묶음 */
+.navBrand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:0;
+}
+
+/* nav 로고 크기 */
+.navBrandLogo{
+  width:28px;
+  height:28px;
+  object-fit:contain;
+}
+
+/* nav 브랜드 글자 */
+.navBrandText{
+  font-family:"Inter","Noto Sans KR",sans-serif;
+  font-size:14px;
+  font-weight:600;
+  letter-spacing:-0.01em;
+  color:var(--text);
+}
+
+/* 메뉴 목록 배치 */
+.navRow{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  gap: 45px;
+  flex-wrap:wrap;
+}
+
+/* 메뉴 글자 스타일 */
+.navRow a{
+  font-family:"Inter","Noto Sans KR",sans-serif;
+  font-size:13px;
+  font-weight:500;
+  letter-spacing:.02em;
+  color:rgba(21,21,21,.78);
+  transition:color .15s ease, transform .15s ease;
+}
+
+.navRow a:hover{
+  color:var(--primary);
+  transform:translateY(-1px);
+}
+
+/* =========================================================
+   공통 섹션 / 카드 / 버튼
+   ---------------------------------------------------------
+   여기서 수정하는 것:
+   - 제목 크기
+   - 본문색
+   - 카드 배경
+   - 버튼 색 / 모양
+========================================================= */
+
+/* alternate 섹션 배경 */
+.alt{
+  background:
+    linear-gradient(180deg, rgba(78,111,73,.03), rgba(78,111,73,0));
+}
+
+/* 작은 섹션 라벨 (Our Story, Product 등) */
+.sectionEyebrow{
+  margin-bottom:12px;
+  font-family:"Inter","Noto Sans KR",sans-serif;
+  font-size:19px;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:rgba(21,21,21,.48);
+}
+
+.sectionEyebrowSmall{
+  margin-bottom:10px;
+}
+
+/* 큰 섹션 제목
+   - 제목 크기 바꾸려면 font-size */
+.sectionTitle{
+  margin:0 0 16px;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:clamp(36px, 4vw, 56px);
+  font-weight:600;
+  line-height:1.02;
+  letter-spacing:-0.03em;
+}
+
+/* 넓은 제목용 제한 */
+.sectionTitleWide{
+  max-width:auto;
+}
+
+/* 섹션 설명문 */
+.sectionLead{
+  margin:0 0 26px;
+  max-width:76ch;
+  color:var(--text-muted);
+  line-height:1.95;
+}
+
+.sectionLeadWide{
+  max-width:68ch;
+}
+
+/* 공통 카드 스타일 */
+.card{
+  background:rgba(255,255,255,.84);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-soft);
+  padding:24px;
+}
+
+/* 카드 안 구분선 */
+.divider{
+  height:1px;
+  background:var(--line);
+  margin:18px 0;
+}
+
+/* 작은 설명문 */
+.small{
+  font-size:15px;
+  line-height:1.7;
+  color:rgba(21,21,21,.56);
+}
+
+/* 공통 버튼 */
+.btn2{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:12px 16px;
+  border-radius:999px;
+  border:1px solid rgba(21,21,21,.10);
+  background:#fff;
+  color:var(--text);
+  font-weight:500;
+  cursor:pointer;
+  transition:transform .12s ease, border-color .12s ease, background .12s ease, color .12s ease;
+}
+
+.btn2:hover{
+  transform:translateY(-1px);
+  border-color:rgba(21,21,21,.16);
+}
+
+/* 초록 메인 버튼 */
+.btn2Strong{
+  background:var(--primary);
+  border-color:var(--primary);
+  color:#fff;
+}
+
+.btn2Strong:hover{
+  background:var(--primary-strong);
+  border-color:var(--primary-strong);
+}
+
+/* 연한 버튼 */
+.btn2Ghost{
+  background:var(--primary-soft);
+  border-color:rgba(78,111,73,.16);
+  color:var(--primary-strong);
+}
+
+/* =========================================================
+   Story 섹션
+   ---------------------------------------------------------
+   여기서 수정하는 것:
+   - 시적 문구 박스 크기
+   - story 이미지 크기
+   - story 본문 크기
+========================================================= */
+
+.storyWrap{
+  display:flex;
+  flex-direction:column;
+  gap:17px;
+  align-items:center;
+}
+
+/* 시적 문구 카드 */
+.storyPoem{
+  width:100%;
+  max-width:1020px;
+  text-align:center;
+  padding:28px 22px;
+  border-radius:22px;
+  background:rgba(255,255,255,.66);
+  border:1px solid rgba(21,21,21,.06);
+  box-shadow:var(--shadow-soft);
+}
+
+/* 시적 문구 글씨 */
+.poemLines{
+  margin:0;
+  font-size:16px;
+  line-height:2;
+  letter-spacing:-0.01em;
+}
+
+/* 제품 라인명 */
+.storyKicker{
+  margin:16px 0 12px;
+  font-family:"Inter","Noto Sans KR",sans-serif;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:rgba(21,21,21,.70);
+}
+
+/* 시적 문구 아래 설명 */
+.storyBody{
+  margin:0;
+  font-size:14px;
+  line-height:1.95;
+  color:var(--text-muted);
+}
+
+/* 체크 리스트 */
+.storyChecks{
+  list-style:none;
+  padding:0;
+  margin:20px auto 0;
+  display:inline-grid;
+  gap:8px;
+  text-align:left;
+}
+
+.storyChecks li{
+  position:relative;
+  padding-left:24px;
+  font-size:14px;
+}
+
+.storyChecks li::before{
+  content:"✓";
+  position:absolute;
+  left:0;
+  top:0;
+  color:var(--primary);
+  font-weight:700;
+}
+
+/* story 이미지 + 설명 카드 줄 */
+.storyImageRow{
+  width:100%;
+  max-width:1020px;
+  display:flex;
+  gap:18px;
+  flex-wrap:wrap;
+  align-items:stretch;
+}
+
+/* story 이미지 박스
+   - 크기 조절하려면 min-height / flex 값 조절 */
+.storyImage{
+  flex:0 1 380px;
+  min-height:280px;
+  border-radius:22px;
+  border:1px solid var(--line);
+  background:
+    radial-gradient(220px 220px at 28% 30%, rgba(78,111,73,.14), transparent 65%),
+    radial-gradient(260px 260px at 72% 72%, rgba(183,207,99,.18), transparent 62%),
+    linear-gradient(180deg, #f8f6f1, #ffffff);
+  background-size:cover;
+  background-position:center;
+  box-shadow:var(--shadow);
+}
+
+/* story 오른쪽 설명 카드 */
+.storySummaryCard{
+  flex:1 1 460px;
+  min-width:min(420px, 100%);
+}
+
+/* 여러 카드 제목 공통 */
+.originTitle,
+.whyTitle,
+.boxTitle,
+.usageTitle,
+.brandRuleTitle,
+.buyTitle{
+  margin:0 0 10px;
+  font-size:17px;
+  font-weight:600;
+}
+
+/* story/product 설명문 공통 */
+.originText,
+.whyDesc,
+.productDesc{
+  margin:0;
+  font-size:14px;
+  line-height:1.90;
+  color:var(--text-muted);
+}
+
+/* 펼쳐지는 전체 이야기 박스 */
+.fullStory{
+  display:none;
+  margin-top:14px;
+  padding:18px;
+  border-radius:16px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.92);
+}
+
+.fullStory.open{
+  display:block;
+}
+
+.fullStory h4{
+  margin:0 0 10px;
+  font-size:16px;
+  font-weight:600;
+}
+
+.fullStory p{
+  margin:0 0 14px;
+  font-size:14px;
+  line-height:1.95;
+  color:rgba(21,21,21,.74);
+}
+
+/* 버튼 줄 공통 */
+.storyBtnRow,
+.contactCtaRow,
+.buyBtns{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:0 auto;
+}
+
+/* principle 카드 */
+.principleCard{
+  width:100%;
+  max-width:1020px;
+  padding:26px 24px;
+}
+
+.principleLead{
+  margin:0;
+  max-width:68ch;
+  font-size:15px;
+  line-height:1.9;
+  color:var(--text-muted);
+}
+
+/* =========================================================
+   Product 섹션
+   ---------------------------------------------------------
+   여기서 수정하는 것:
+   - 제품 카드 2열/1열
+   - 배지 크기
+   - 제품 제목 크기
+========================================================= */
+
+/* 2열 그리드
+   - 1열로 바꾸고 싶으면 grid-template-columns:1fr; */
+.grid2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+
+/* 제품 배지 줄 */
+.pillRow{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:12px;
+}
+
+/* 제품 배지 */
+.pill{
+  padding:7px 10px;
+  border-radius:999px;
+  font-size:16px;
+  background:var(--primary-soft);
+  border:1px solid rgba(21,21,21,.08);
+  color:rgba(21,21,21,.82);
+}
+
+.usageList,
+.brandRuleList,
+.listMuted,
+.contactInfoList{
+  margin:0;
+  padding-left:18px;
+  font-size:14px;
+  line-height:1.9;
+  color:var(--text-muted);
+}
+
+/* 제품명 크기 */
+.productTitle{
+  font-size:18px;
+  margin:0 0 8px;
+}
+
+.productNote{
+  margin-top:14px;
+}
+
+/* =========================================================
+   Buy 섹션
+   ---------------------------------------------------------
+   여기서 수정하는 것:
+   - 구매 카드 배경
+   - 버튼 정렬
+========================================================= */
+.buyStrip{
+  padding:10px 0;
+}
+
+.buyCard{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  flex-wrap:wrap;
+  padding:26px 24px;
+  border-radius:24px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.90), rgba(255,255,255,.78));
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+}
+
+.buyCopy{
+  max-width:40rem;
+}
+
+/* =========================================================
+   표 / FAQ
+   ---------------------------------------------------------
+   여기서 수정하는 것:
+   - 표 셀 간격
+   - FAQ 카드 여백 / 제목 크기
+========================================================= */
+
+/* 표 감싸는 카드 */
+.tableCard{
+  padding:0;
+  overflow:hidden;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  background:rgba(255,255,255,.84);
+}
+
+th,td{
+  padding:14px 16px;
+  text-align:left;
+  border-bottom:1px solid var(--line);
+  font-size:14px;
+  line-height:1.8;
+}
+
+th{
+  background:rgba(78,111,73,.08);
+  font-weight:600;
+}
+
+tr:last-child td{
+  border-bottom:none;
+}
+
+.thCol{
+  width:28%;
+}
+
+/* FAQ 카드 */
+.faqItem{
+  margin:10px 0;
+  padding:18px;
+  border-radius:16px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.82);
+  box-shadow:var(--shadow-soft);
+}
+
+/* FAQ 질문 줄 */
+.faqQ{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  cursor:pointer;
+  font-weight:500;
+}
+
+/* FAQ 답변 */
+.faqA{
+  display:none;
+  margin-top:12px;
+  color:var(--text-muted);
+  line-height:1.88;
+  font-size:14px;
+}
+
+.faqItem.open .faqA{
+  display:block;
+}
+
+/* =========================================================
+   Footer
+   ---------------------------------------------------------
+   여기서 수정하는 것:
+   - footer 배경
+   - 브랜드 로고 크기
+   - footer 글씨 크기
+========================================================= */
+footer{
+  padding:34px 0 44px;
+  background:var(--surface-soft);
+  border-top:1px solid rgba(0,0,0,.04);
+}
+
+.footerGrid{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:18px;
+}
+
+/* footer 브랜드 묶음 */
+.footerBrand{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:18px;
+}
+
+/* footer 로고 크기 */
+.footerBrandLogo{
+  width:34px;
+  height:34px;
+  object-fit:contain;
+}
+
+/* footer Soliveon 글자 */
+.footerBrandText{
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-size:30px;
+  font-weight:600;
+  line-height:1;
+  letter-spacing:-0.03em;
+}
+
+.footerTitle{
+  margin-bottom:10px;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.08em;
+  opacity:.7;
+}
+
+.footerText{
+  font-size:13px;
+  line-height:1.9;
+  color:rgba(21,21,21,.66);
+}
+
+.iconRow{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+
+.iconBtn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px 12px;
+  border-radius:999px;
+  border:1px solid rgba(21,21,21,.10);
+  background:rgba(255,255,255,.86);
+  font-size:13px;
+  font-weight:500;
+}
+
+/* =========================================================
+   TOP 버튼
+   ---------------------------------------------------------
+   여기서 수정하는 것:
+   - 우하단 TOP 버튼 크기 / 색 / 위치
+========================================================= */
+.topBtn{
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  z-index:9999;
+  width:54px;
+  height:54px;
+  border:none;
+  border-radius:999px;
+  background:var(--primary);
+  color:#fff;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.06em;
+  cursor:pointer;
+  box-shadow:0 14px 30px rgba(0,0,0,.12);
+  opacity:0;
+  transform:translateY(12px);
+  pointer-events:none;
+  transition:opacity .22s ease, transform .22s ease, background .12s ease;
+}
+
+.topBtn.show{
+  opacity:1;
+  transform:translateY(0);
+  pointer-events:auto;
+}
+
+.topBtn:hover{
+  background:var(--primary-strong);
+}
+
+/* 유틸 */
+.mt16{margin-top:16px;}
+.mt0{margin-top:0;}
+
+/* =========================================================
+   태블릿 이하
+   ---------------------------------------------------------
+   여기서 수정하는 것:
+   - 모바일에서 2열 -> 1열
+   - nav 줄바꿈
+========================================================= */
+@media (max-width:920px){
+  .grid2,
+  .footerGrid{
+    grid-template-columns:1fr;
+  }
+
+  .navFloatInner{
+    border-radius:24px;
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .navRow{
+    width:100%;
+    gap:18px;
+    overflow-x:auto;
+    justify-content:flex-start;
+    flex-wrap:nowrap;
+    padding-bottom:2px;
+  }
+
+  .storyImage{
+    min-height:220px;
+  }
+}
+
+/* =========================================================
+   모바일
+   ---------------------------------------------------------
+   여기서 수정하는 것:
+   - hero 여백
+   - 로고 크기
+   - 카드 패딩
+========================================================= */
+@media (max-width:640px){
+  section{
+    padding:78px 0;
+  }
+
+  .container{
+    width:min(var(--max), calc(100% - 28px));
+  }
+
+  .heroTextEditorial{
+    padding-top:10vh;
+  }
+
+  .heroLogo{
+    width:56px;
+  }
+
+  .taglineEditorial{
+    margin-top:22px;
+  }
+
+  .heroSubcopy{
+    margin-top:18px;
+    max-width:22rem;
+  }
+
+  .heroScrollCue{
+    bottom:24px;
+  }
+
+  .storyPoem,
+  .card,
+  .buyCard{
+    padding:20px;
+  }
+}
+
+/* 모션 최소화 설정 */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  .heroSvg::before{ animation:none; }
+}
